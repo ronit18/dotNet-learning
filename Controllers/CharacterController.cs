@@ -16,41 +16,47 @@ namespace dotNetRpg.Controllers
 
 
 		[HttpGet("get")]
-		public ActionResult<List<Character>> Getall()
+		[ProducesResponseType(200)]
+		[ProducesResponseType(500)]
+		public async Task<ActionResult<List<Character>>> Getall()
 		{
 			try
 			{
-				return Ok(_characterService.GetAllCharacters());
+				return Ok(await _characterService.GetAllCharacters());
 			}
-			catch (System.Exception)
+			catch (Exception)
 			{
-				return BadRequest("Bad Request");
+				return StatusCode(500, "Bad Request");
 			}
 		}
 
 		[HttpGet("get/{id:int}")]
-		public ActionResult<List<Character>> GetSingle(int id)
+		[ProducesResponseType(200)]
+		[ProducesResponseType(500)]
+		public async Task<ActionResult<List<Character>>> GetSingle(int id)
 		{
 			try
 			{
-				return Ok(_characterService.GetCharacterById(id));
+				return Ok(await _characterService.GetCharacterById(id));
 			}
-			catch (System.Exception)
+			catch (Exception)
 			{
-				return BadRequest("Bad Request");
+				return StatusCode(500, "Bad Request");
 			}
 		}
 
 		[HttpPost("create")]
-		public ActionResult<List<Character>> AddCharacter([FromBody] Character newCharacter)
+		[ProducesResponseType(200)]
+		[ProducesResponseType(500)]
+		public async Task<ActionResult<List<Character>>> AddCharacter([FromBody] Character newCharacter)
 		{
 			try
 			{
-				return Ok(_characterService.AddCharacter(newCharacter));
+				return Ok(await _characterService.AddCharacter(newCharacter));
 			}
-			catch (System.Exception)
+			catch (Exception)
 			{
-				return BadRequest("Bad Request");
+				return StatusCode(500, "Bad Request");
 			}
 		}
 	}

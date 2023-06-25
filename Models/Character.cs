@@ -14,4 +14,8 @@ public class Character
 
 	public RpgClass Class { get; set; } = RpgClass.Knight;
 
+	public static implicit operator List<object>(Character v)
+	{
+		throw new NotImplementedException();
+	}
 }

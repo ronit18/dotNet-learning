@@ -6,18 +6,21 @@ namespace dotNetRpg.Controllers
 	[Route("api/[controller]")]
 	public class CharacterController : ControllerBase
 	{
-		private static List<Character> characters = new List<Character>{
-			new Character(),
-			new Character{Id=1,Name="Ronit"}
+		private readonly ICharacterService _characterService;
 
-		};
+		public CharacterController(ICharacterService characterService)
+		{
+			_characterService = characterService;
+
+		}
+
 
 		[HttpGet("get")]
 		public ActionResult<List<Character>> Getall()
 		{
 			try
 			{
-				return Ok(characters);
+				return Ok(_characterService.GetAllCharacters());
 			}
 			catch (System.Exception)
 			{
@@ -30,7 +33,20 @@ namespace dotNetRpg.Controllers
 		{
 			try
 			{
-				return Ok(characters.FirstOrDefault(c => c.Id == id));
+				return Ok(_characterService.GetCharacterById(id));
+			}
+			catch (System.Exception)
+			{
+				return BadRequest("Bad Request");
+			}
+		}
+
+		[HttpPost("create")]
+		public ActionResult<List<Character>> AddCharacter([FromBody] Character newCharacter)
+		{
+			try
+			{
+				return Ok(_characterService.AddCharacter(newCharacter));
 			}
 			catch (System.Exception)
 			{

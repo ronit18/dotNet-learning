@@ -18,7 +18,7 @@ namespace dotNetRpg.Controllers
 		[HttpGet("get")]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult<List<Character>>> Getall()
+		public async Task<ActionResult<ServiceResponse<List<Character>>>> Getall()
 		{
 			try
 			{
@@ -33,7 +33,7 @@ namespace dotNetRpg.Controllers
 		[HttpGet("get/{id:int}")]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult<List<Character>>> GetSingle(int id)
+		public async Task<ActionResult<ServiceResponse<List<Character>>>> GetSingle(int id)
 		{
 			try
 			{
@@ -48,7 +48,7 @@ namespace dotNetRpg.Controllers
 		[HttpPost("create")]
 		[ProducesResponseType(200)]
 		[ProducesResponseType(500)]
-		public async Task<ActionResult<List<Character>>> AddCharacter([FromBody] Character newCharacter)
+		public async Task<ActionResult<ServiceResponse<List<Character>>>> AddCharacter([FromBody] Character newCharacter)
 		{
 			try
 			{
